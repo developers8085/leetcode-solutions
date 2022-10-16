@@ -1,7 +1,45 @@
 class Solution {
 public:
-    int largestInteger(int num) {
+    int largestInteger(int n) {
+        priority_queue<int,vector<int>,greater<int>> p1;
+        priority_queue<int,vector<int>,greater<int>> p2;
         
+        int tmp = n;
+        
+        while(tmp>0){
+            int rem = tmp%10;
+            if(rem%2==0){
+                p1.push(rem);
+            }else{
+                p2.push(rem);
+            }
+            tmp= tmp/10;
+        }
+        int ans = 0;
+        long mul = 1;
+        while(!p1.empty() && !p2.empty()){
+            int rem = n%10;
+            if(rem % 2 ==0){
+                ans = ans + p1.top()*mul; p1.pop();
+            }else{
+                ans = ans + p2.top()*mul; p2.pop();
+            }
+            n = n/10;
+            mul = mul * 10;
+        }
+        
+        while(!p1.empty()){
+            ans = ans + p1.top()*mul; p1.pop();
+            mul = mul*10;
+        }
+        while(!p2.empty()){
+            ans = ans + p2.top()*mul; p2.pop();
+            mul = mul*10;
+        }
+        
+        return ans;
+    }
+    int basicSol(int num){
         vector<int> even;
         vector<int> odd;
         vector<int> tmp;
