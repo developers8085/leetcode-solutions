@@ -5,8 +5,8 @@ class Solution {
             return "0";
         StringBuilder ans = new StringBuilder();
         ans.append(((num > 0) ^ (den > 0)) ? "-" : "");
-        long numerator = Math.abs(Long.valueOf(Math.abs(num)));
-        long denominator = Math.abs(Long.valueOf(Math.abs(den)));
+        long numerator = Math.abs((long)num);
+        long denominator = Math.abs((long)den);
         ans.append(numerator/denominator);
         numerator=numerator%denominator;
         if(numerator ==0){
