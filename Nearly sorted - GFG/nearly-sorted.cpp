@@ -9,16 +9,17 @@ class Solution
     public:
     //Function to return the sorted array.
     vector <int> nearlySorted(int arr[], int n, int K){
-        priority_queue<int> pq;
+        priority_queue<int,vector<int>,greater<int>> pq;
         
-        for(int i=0;i<n;i++){
+        for(int i=0;i<K;i++)
+           pq.push(arr[i]);
+        vector<int> ans; 
+        for(int i=K;i<n;i++){
             pq.push(arr[i]);
+            ans.push_back(pq.top()); pq.pop();
         }
-        vector<int> ans(n);
-        int i = n-1;
         while(!pq.empty()){
-            ans[i]=pq.top(); pq.pop();
-            i--;
+            ans.push_back(pq.top()); pq.pop();
         }
         return ans;
     }
