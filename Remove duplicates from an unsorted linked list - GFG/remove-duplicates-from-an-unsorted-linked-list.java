@@ -105,7 +105,7 @@ class Solution
                  hs.add(curval);
                  prev=curr;
              }
-             curr = prev.next;
+             curr = curr.next;
          }
          return head;
     }
