@@ -45,10 +45,6 @@ class Solution{
         
         while(l<=r){
             int mid = l + (r-l)/2;
-            if(arr[mid]==x){
-                ans = mid;
-                break;
-            }
             if(arr[mid]<=x){
                 ans = mid;
                 l = mid+1;
