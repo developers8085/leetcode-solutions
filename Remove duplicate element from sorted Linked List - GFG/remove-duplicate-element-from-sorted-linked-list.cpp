@@ -75,7 +75,9 @@ Node *removeDuplicates(Node *head)
        Node * t2 = t1->next;
        
        while(t2 != NULL && t2->data == t1->data){
+           Node *dump = t2;
            t2 = t2->next;
+           delete(dump);
        }
        t1->next = t2;
        t1 = t2;
