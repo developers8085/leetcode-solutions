@@ -99,6 +99,7 @@ class Solution{
     vector<int> ExtremeNodes(Node* root)
     {
         
+      /* queue method
         queue<Node *> q;
         q.push(root);
         vector<int> ans;
@@ -123,6 +124,30 @@ class Solution{
             alternative = !alternative;
         }
         return ans;
+        */
+        map<int,int> mp;
+        mp[0]=root->data;
+        traverse(root->left,mp,1);
+        vector<int> ans;
+        for(auto x : mp){
+            ans.push_back(x.second);
+        }
+        return ans;
+    }
+    void traverse(Node *root,map<int,int> &mp,int l){
+        if(root == NULL){
+            return ;
+        }
+        
+        if(l%2!=0){
+            if(mp.find(l) == mp.end()){
+                mp[l]=root->data;
+            }
+        }else{
+            mp[l]=root->data;
+        }
+        traverse(root->left,mp,l+1);
+        traverse(root->right,mp,l+1);
     }
 };
 
