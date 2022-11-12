@@ -35,11 +35,17 @@ class Solution
         if(root == NULL){
             return ;
         }
-        if(abs(root->data-key)<*ans){
-            *ans = abs(root->data-key);
+        if(root->data == key){
+            *ans = 0;
+            return ;
+        }else if(*ans > abs(root->data-key)){
+            *ans = abs(root->data-key); 
         }
-        traverse(root->left,key,ans);
-        traverse(root->right,key,ans);
+        if(key<root->data){
+            traverse(root->left,key,ans);
+        }else{
+            traverse(root->right,key,ans);
+        }
     }
 };
 
