@@ -67,7 +67,9 @@ struct Node
 void printList(struct Node *head)
 {
     Node * tmp = head;
-    
+    if(tmp == NULL){
+        return ;
+    }
     do {
         cout<<tmp->data<<" ";
         tmp = tmp->next;
