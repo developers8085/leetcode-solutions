@@ -102,6 +102,7 @@ struct Node
 
 void splitList(Node *head, Node **head1_ref, Node **head2_ref)
 {
+    // Copied Solution LOL
     Node *slow_ptr = head; 
     Node *fast_ptr = head; 
     if(head == NULL) 
