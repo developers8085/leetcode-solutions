@@ -29,6 +29,7 @@ int longestSubstrDistinctChars (string S)
     int n = S.size();
     int ans=0;
     while(end<n){
+        // skip all first occurences
         while(end<n && hs[S[end]]<=0){
             if((end-st+1)>ans){
                 ans = max(ans,end-st+1);
