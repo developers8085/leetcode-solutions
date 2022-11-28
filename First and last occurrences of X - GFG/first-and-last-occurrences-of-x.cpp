@@ -7,38 +7,58 @@ class Solution {
   public:
     vector<int> firstAndLast(vector<int> &arr, int n, int x) {
         int first =-1;
-        int last  =-1;
+        int last1  =-1;
         vector<int> ans;
-        first = bnsFirst(arr,0,n-1,x,n-1);
+        first = bnsFirst(arr,0,n-1,x);
         if(first ==-1){
             ans.push_back(-1);
             return ans;
         }
-        last = first;
-        while(first>=0 && arr[first]==x){
-            first--;
-        }
-        while(last<n && arr[last]==x){
-            last++;
-        }
-        // last = bnsSecond(arr,0,n-1,k);
-        ans.push_back(first+1);
-        ans.push_back(last-1);
+        last1 = bnsLast(arr,0,n-1,x,n);
+        ans.push_back(first);
+        ans.push_back(last1);
         return ans;
     }
-    int bnsFirst(vector<int> arr,int l,int r,int k,int n){
+    int bnsFirst(vector<int> arr,int l,int r,int k){
         if(l>r){
             return -1;
         }
-        int m = l+(r-l)/2;
-        if(arr[m]==k){
+        int m = l +(r-l)/2;
+        if((m ==0 || k>arr[m-1]) && arr[m]==k){
             return m;
+        }else if(k>arr[m]){
+            return bnsFirst(arr,m+1,r,k);
+        }else{
+            return bnsFirst(arr,l,m-1,k);
         }
-        if(arr[m]>k){
-            return bnsFirst(arr,l,m-1,k,n);
-        }
-        return bnsFirst(arr,m+1,r,k,n);
     }
+    int bnsLast(vector<int> arr,int l,int r,int k,int n){
+        if(l>r){
+            return -1;
+        }
+        int m = l +(r-l)/2;
+        if((m ==n-1 || k<arr[m+1]) && arr[m]==k){
+            return m;
+        }else if(k<arr[m]){
+            return bnsLast(arr,l,m-1,k,n);
+        }else{
+            return bnsLast(arr,m+1,r,k,n);
+        }
+    }
+    int last(vector<int> arr, int low, int high, int x, int n)
+{
+    if (high >= low) {
+        int mid = low + (high - low) / 2;
+        if ((mid == n - 1 || x < arr[mid + 1])
+            && arr[mid] == x)
+            return mid;
+        else if (x < arr[mid])
+            return last(arr, low, (mid - 1), x, n);
+        else
+            return last(arr, (mid + 1), high, x, n);
+    }
+    return -1;
+}
 };
 
 //{ Driver Code Starts.
