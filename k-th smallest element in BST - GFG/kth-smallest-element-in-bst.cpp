@@ -95,25 +95,53 @@ class Solution {
   public:
     // Return the Kth smallest element in the given BST
     int KthSmallestElement(Node *root, int K) {
-        vector<int> v;
-        sortBST(root,v,K);
+        
+    /*    vector<int> v;
+        sortBSTN(root,v,K);
+        sortBSTK(root,v,K);
         if(v.size()<K){
             return -1;
         }
         return v[K-1];
+        */
+        int ans = -1;
+        int count =0;
+        sortBST(root,&count,K,&ans);
+        return ans;
     }
-    void sortBST(Node *root,vector<int> &v,int k){
+    void sortBST(Node *root,int *count,int k,int *ans){
         if(root == NULL){
             return ;
         }
-        sortBST(root->left,v,k);
+        sortBST(root->left,count,k,ans);
+        *count = *count+1;
+        if(*count ==k){
+            *ans = root->data;
+            return ;
+        }
+        sortBST(root->right,count,k,ans);
+    }
+    void sortBSTN(Node *root,vector<int> &v,int k){
+        if(root == NULL){
+            return ;
+        }
+        sortBSTN(root->left,v,k);
+        v.push_back(root->data);
+        sortBSTN(root->right,v,k);
+    }
+    void sortBSTK(Node *root,vector<int> &v,int k){
+        if(root == NULL){
+            return ;
+        }
+        sortBSTK(root->left,v,k);
         v.push_back(root->data);
         if(v.size()==k){
             return ;
         }
-        sortBST(root->right,v,k);
+        sortBSTK(root->right,v,k);
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
