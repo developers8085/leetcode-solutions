@@ -108,6 +108,9 @@ class Solution {
         }
         sortBST(root->left,v,k);
         v.push_back(root->data);
+        if(v.size()==k){
+            return ;
+        }
         sortBST(root->right,v,k);
     }
 };
