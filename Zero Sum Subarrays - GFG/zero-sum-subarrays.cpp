@@ -3,23 +3,23 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
+
 
 // } Driver Code Ends
 //User function template for C++
 
 class Solution{
-    public:
+public:
     //Function to count subarrays with sum equal to 0.
-    ll findSubarray(vector<ll> arr, int n ) {
-        map<int,int> mp;
-        mp[0]=1;
-        int ans =0;
-        int sum =0;
+    long long int findSubarray(vector<long long int> &arr, int n ) {
+        long long int ans =0;
+        unordered_map<long long int,long long int> mp;
+        long long int sum = 0;
+        mp[sum]=1;
         for(int i=0;i<n;i++){
-            sum = sum +arr[i];
-            if(mp.find(sum) !=mp.end()){
-                ans = ans +mp[sum];
+            sum = sum + arr[i];
+            if(mp.find(sum)!= mp.end()){
+                ans = ans + mp[sum];
             }
             mp[sum]++;
         }
@@ -37,7 +37,7 @@ int main()
         int n;
         cin>>n; //input size of array
        
-        vector<ll> arr(n,0);
+        vector<long long int> arr(n,0);
         
         for(int i=0;i<n;i++)
             cin>>arr[i]; //input array elements
