@@ -5,15 +5,11 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution{
-    int tmp[63*63*63];
+    vector<long long> tmp;
 public:
     void precompute()
     {
-        
-    }
-    
-    long long solve(long long L, long long R){
-        long long ans = 0;
+        long long index = 0;
         for(int i=0;i<63;i++){
             for(int j=i+1;j<63;j++){
                 for(int k=j+1;k<63;k++){
@@ -21,19 +17,22 @@ public:
                     curr = curr | 1L<<i;
                     curr = curr | 1L<<j;
                     curr = curr | 1L<<k;
-                    if(curr>=L && curr<=R){
-                        ans++;
-                    }
+                    tmp.push_back(curr);
                 }
             }
         }
+        sort(tmp.begin(),tmp.end());
+    }
+    long long solve(long long L, long long R){
+        long long ans = 0;
+        ans = rightIndex(R)-leftIndex(L)+1;
         return ans;
     }
     
     int leftIndex(long long key){
         int ans =0;
         int l =0;
-        int r = 63*63*63-1;
+        int r = tmp.size()-1;
         while(l<=r){
             int m = l +(r-l)/2;
             if(tmp[m]>=key){
@@ -48,15 +47,15 @@ public:
     
     int rightIndex(long long key){
         int l =0;
-        int r = 63*63*63-1;
+        int r = tmp.size()-1;
         int ans =0;
         while(l<=r){
             int m = l +(r-l)/2;
-            if(tmp[m]>=key){
+            if(tmp[m]<=key){
                 ans = m;
-                r = m-1;
-            }else{
                 l= m+1;
+            }else{
+                r =m-1;
             }
         }
         return ans;
