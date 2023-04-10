@@ -13,9 +13,18 @@ class Solution
     int findSum(int a[], int n)
     {
     	// sorting
+    	/*
     	sort(a,a+n);
-    	
     	return a[0]+a[n-1];
+    	*/
+    	int mn = a[0];
+    	int mx = a[0];
+    	
+    	for(int i=0;i<n;i++){
+    	    mn = min(mn,a[i]);
+    	    mx = max(mx,a[i]);
+    	}
+    	return mn+mx;
     }
 
 };
