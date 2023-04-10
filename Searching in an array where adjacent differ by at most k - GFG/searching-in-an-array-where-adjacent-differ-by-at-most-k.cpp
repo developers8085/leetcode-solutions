@@ -36,10 +36,20 @@ return 0;
 // such that all elements differ by at-most k.
 int search(int arr[], int n, int x, int k)
 {
+    int i=0;
+    while(i<n){
+        if(arr[i]==x){
+            return i;
+        }
+        i = i + max(1,abs(arr[i]-x)/k);
+    }
+    return -1;
+    /*
     for(int i=0;i<n;i++){
         if(arr[i]==x){
             return i;
         }
     }
-    return -1;	
+    return -1;
+    */
 }    	
