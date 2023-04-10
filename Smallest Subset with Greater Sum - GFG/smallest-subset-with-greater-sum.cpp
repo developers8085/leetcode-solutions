@@ -11,6 +11,7 @@ class Solution{
     public:
     int minSubset(vector<int> &arr,int N){
         sort(arr.begin(),arr.end());
+        /* Approach 1
         long long int lsum=0;
         long long int rsum=0;
         int i=-1;
@@ -26,6 +27,23 @@ class Solution{
             }
         }
         // cout<<i<<endl;
+        return ans;
+        */
+        
+        long long int lsum = 0;
+        long long int rsum = 0;
+        for(auto x: arr){
+            lsum = lsum + x;
+        }
+        int ans =0;
+        int index = N;
+        while(lsum >= rsum){
+            int curr = --index;
+            lsum = lsum - arr[curr];
+            rsum = rsum + arr[curr];
+            // index;
+            ans++;
+        }
         return ans;
     }
 };
